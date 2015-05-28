@@ -1,3 +1,5 @@
+Quick fix for Jeffrey Way's way/form package to make it compatible with Laravel 5.
+
 The basic idea is simple: make form creation simpler.
 
 [View a quick visual
@@ -51,7 +53,7 @@ Begin by installing the package through Composer.
 
 ```js
 require: {
-    "way/form": "dev-master"
+    "livecontrol/form": "dev-master"
 }
 ```
 
