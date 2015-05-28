@@ -1,16 +1,16 @@
 {
-    "name": "way/form",
+    "name": "livecontrol/form",
     "description": "Make form handling in Laravel simpler.",
-    "keywords": ["laravel", "forms"],
+    "keywords": ["laravel", "forms", "laravel5"],
     "authors": [
         {
-            "name": "Jeffrey Way",
-            "email": "jeffrey@jeffrey-way.com"
+            "name": "Jeffrey de Vreede",
+            "email": "jeffrey@devreede.eu"
         }
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "~4"
+        "illuminate/support": "~5"
     },
     "autoload": {
         "psr-0": {
