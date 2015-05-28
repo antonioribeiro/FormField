@@ -10,7 +10,14 @@ class FormField {
      * @var Way\Form\FormField
      */
     protected static $instance;
-
+    
+    protected $translator;
+    
+    public function __construct()
+    {
+        $this->translator = \config::$app['translator'];
+    }
+    
     /**
      * Make the form field
      *
@@ -108,6 +115,11 @@ class FormField {
      */
     protected function prettifyFieldName($name)
     {
+        if($this->translator->has('validation.attributes.'.$name))
+        {
+            return ucfirst($this->translator->get('validation.attributes.'.$name));
+        }
+        
         return ucwords(preg_replace('/(?<=\w)(?=[A-Z])/', " $1", $name));
     }
 
