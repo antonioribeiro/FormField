@@ -9,7 +9,7 @@ class FormServiceProvider extends ServiceProvider {
 
     public function boot()
     {
-        $this->package('way/form');
+        $this->package('livecontrol/form');
 
         AliasLoader::getInstance()->alias('FormField', 'Way\Form\FormField');
     }
