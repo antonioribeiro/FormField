@@ -1,4 +1,6 @@
-Quick fix for Jeffrey Way's way/form package to make it compatible with Laravel 5.
+# Quick fix for Jeffrey Way's way/form package to make it compatible with LiveControls CMS and Laravel 5.
+
+## not compatible with standalone laravel 5
 
 The basic idea is simple: make form creation simpler.
 
