@@ -26,6 +26,18 @@ class FormField {
      */
     public function make($name, array $args)
     {
+        $type = array_get($args, 'type') ?: $this->guessInputType($name);
+        
+        if($type == 'checkbox')
+        {
+            $wrapper = Config::get('form::wrapper');
+            $wrapperClass = Config::get('form::wrapperClass');
+            
+            $label = array_get($args, 'label');
+            is_null($label) and $label = $this->prettifyFieldName($name);
+            return '<'.$wrapper.' class="'.$wrapperClass.' checkbox"><label>'.$this->createInput('checkbox', $args, $name).' '.$label.'</label></'.$wrapper.'>';
+        }
+        
         $wrapper = $this->createWrapper();
         $field = $this->createField($name, $args);
 
@@ -78,7 +90,7 @@ class FormField {
 
         // If no label was provided, let's do our best to construct
         // a label from the method name.
-        is_null($label) and $label = $this->prettifyFieldName($name) . ': ';
+        is_null($label) and $label = $this->prettifyFieldName($name) . ' ';
 
         return $label ? Form::label($name, $label, array('class' => 'control-label')) : '';
     }
@@ -92,9 +104,21 @@ class FormField {
      */
     protected function createInput($type, $args, $name)
     {
-        return $type == 'password'
-            ? Form::password($name, $args)
-            : Form::$type($name, null, $args);
+        switch($type)
+        {
+            case 'password':
+                return Form::password($name, $args);
+            case 'select':
+                $options = (isset($args['options']) ? $args['options'] : []);
+                unset($args['options']);
+                return Form::select($name, $options, (isset($args['default']) ? $args['default'] : null), $args);
+            case 'checkbox':
+                return Form::checkbox($name, 'true', (isset($args['checked']) ? $args['checked'] : null), $args);
+            default:
+                $args['class'] .= ' cms-input-date';
+                return Form::text($name, null, $args);
+        }
+       
     }
 
     /**
