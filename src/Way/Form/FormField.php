@@ -35,10 +35,10 @@ class FormField {
             
             $label = array_get($args, 'label');
             is_null($label) and $label = $this->prettifyFieldName($name);
-            return '<'.$wrapper.' class="'.$wrapperClass.' checkbox"><label>'.$this->createInput('checkbox', $args, $name).' '.$label.'</label></'.$wrapper.'>';
+            return '<'.$wrapper.' class="'.$wrapperClass.' group-' . $name . ' checkbox"><label>'.$this->createInput('checkbox', $args, $name).' '.$label.'</label></'.$wrapper.'>';
         }
         
-        $wrapper = $this->createWrapper();
+        $wrapper = $this->createWrapper($name);
         $field = $this->createField($name, $args);
 
         return str_replace('{{FIELD}}', $field, $wrapper);
@@ -48,12 +48,12 @@ class FormField {
      * Prepare the wrapping container for
      * each field.
      */
-    protected function createWrapper()
+    protected function createWrapper($name)
     {
         $wrapper = Config::get('form::wrapper');
         $wrapperClass = Config::get('form::wrapperClass');
 
-        return '<' . $wrapper . ' class="' . $wrapperClass . '">{{FIELD}}</' . $wrapper . '>';
+        return '<' . $wrapper . ' class="' . $wrapperClass . ' group-' . $name . '">{{FIELD}}</' . $wrapper . '>';
     }
 
     /**
@@ -74,7 +74,7 @@ class FormField {
         $field = $this->createLabel($args, $name);
 
         unset($args['label']);
-
+        
         return $field .= $this->createInput($type, $args, $name);
     }
 
