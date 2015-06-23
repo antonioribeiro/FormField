@@ -116,11 +116,10 @@ class FormField {
                 return Form::checkbox($name, 'true', (isset($args['checked']) ? $args['checked'] : null), $args);
             case 'date':
                 $args['class'] .= ' cms-input-date';
-                return Form::text($name, null, $args);
+                return Form::text($name, (isset($args['default']) ? $args['default'] : null), $args);
             default:
-                return Form::text($name, null, $args);
+                return Form::text($name, (isset($args['default']) ? $args['default'] : null), $args);
         }
-       
     }
 
     /**
