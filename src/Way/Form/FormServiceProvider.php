@@ -1,16 +1,15 @@
-<?php namespace Way\Form;
+<?php
+
+namespace Way\Form;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Foundation\AliasLoader;
 
-class FormServiceProvider extends ServiceProvider {
-
-    public function register() {}
-
-    public function boot()
-    {
-        $this->package('livecontrol/form');
-
-        AliasLoader::getInstance()->alias('FormField', 'Way\Form\FormField');
-    }
+class FormServiceProvider extends ServiceProvider
+{
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = true;
 }
